@@ -18,7 +18,12 @@
     <body>
 
         <div ng-controller="MainController as movies">
-            <form ng-submit="movies.addMovie();">
+            <input 
+                type="text"
+                placeholder="Search a movie"
+                ng-model="search">
+            <!-- Adds the ability to add and remove movies -->
+            <!-- <form ng-submit="movies.addMovie();">
                 <p>
                     Add a movie
                 </p>
@@ -31,7 +36,7 @@
                         placeholder="Release year" 
                         ng-model="movies.newRelease">
                         <button type="submit">Add new movie!</button>
-            </form>
+            </form> -->
             <!-- Below shows how to use make a list of likes, and how to unlike a movie -->
             <!-- <div class="likes">
                 <p>
@@ -50,8 +55,8 @@
             </div> -->
             <ul>
                 <li ng-class="movie.year < 1995 ? 'old' : 'modern'" 
-                    ng-repeat="movie in movies.favorites">
-                    <p>{{ movie.title }} {{ $index }}</p>
+                    ng-repeat="movie in movies.favorites | filter: {year: search}">
+                    <p>{{ movie.title }}</p>
                     <p>Released in: {{ movie.year }}</p>
                     <!-- The biggest difference between ng-if compared to ng-if and ng-hide/ng-show is ng-if will actually destroy the dom element, whereas 
                     ng-hide/ng-show will set css to display none. -->
