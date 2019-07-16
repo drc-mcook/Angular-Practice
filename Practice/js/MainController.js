@@ -1,6 +1,17 @@
 //Dependency injection is fancy name for something that we can ask for dependancys for, we ask for it my passing it into the function
 //If we don't ask for it as a parameter in the function, it will throw as error because angular doesn't know about it
 function MainController() {
+    this.newTitle = '';
+    this.newRelease = '';
+    this.onChange = function () {
+        console.log ('Change!', this.newTitle)
+    }
+    this.addMovie = function (){
+        this.favorites.unshift({
+            title: this.newTitle,
+            year: this.newRelease
+        })
+    }
     this.likesList = [];
     this.addToLikes = function (movie){
         this.likesList.push(movie);

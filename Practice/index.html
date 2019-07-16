@@ -4,9 +4,9 @@
         <title>My Angular app</title>
         <script src="js/libs/angular.js"></script>
         <style>
-        .old {background: red;}
+        /* .old {background: red;}
         .modern {background: blue;}
-        .new {background: green;}
+        .new {background: green;} */
         .likes {
             background: #f9f9f9;
             border-radius: 3px;
@@ -18,7 +18,22 @@
     <body>
 
         <div ng-controller="MainController as movies">
-            <div class="likes">
+            <form ng-submit="movies.addMovie();">
+                <p>
+                    Add a movie
+                </p>
+                <input type="text" 
+                       placeholder="Title" 
+                       ng-model="movies.newTitle"
+                       ng-change="movies.onChange();">
+                <input 
+                        type="text" 
+                        placeholder="Release year" 
+                        ng-model="movies.newRelease">
+                        <button type="submit">Add new movie!</button>
+            </form>
+            <!-- Below shows how to use make a list of likes, and how to unlike a movie -->
+            <!-- <div class="likes">
                 <p>
                     Matt's like list
                 </p>
@@ -32,7 +47,7 @@
                         </p>
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <ul>
                 <li ng-class="movie.year < 1995 ? 'old' : 'modern'" 
                     ng-repeat="movie in movies.favorites">
@@ -40,7 +55,8 @@
                     <p>Released in: {{ movie.year }}</p>
                     <!-- The biggest difference between ng-if compared to ng-if and ng-hide/ng-show is ng-if will actually destroy the dom element, whereas 
                     ng-hide/ng-show will set css to display none. -->
-                    <p ng-hide="!movie.popular">This movie is popular!</p>
+                    <!-- Below are examples of how to use the ng-switch, and how to use logic with ng-show and ng-hide -->
+                    <!-- <p ng-hide="!movie.popular">This movie is popular!</p>
                     <p ng-show="movie.year > '2000'">This is a newer movie!</p>
                     <div ng-switch="movie.category">
                         <div ng-switch-when="fantasy">Fantasy movie!</div>
@@ -53,7 +69,7 @@
                         <a href="" ng-click="movies.addToLikes(movie);">
                             Like this movie
                         </a>
-                    </p>
+                    </p> -->
                 </li>
             </ul>
         </div>
