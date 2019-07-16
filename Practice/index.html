@@ -1,0 +1,64 @@
+
+<html ng-app="app">
+    <head>
+        <title>My Angular app</title>
+        <script src="js/libs/angular.js"></script>
+        <style>
+        .old {background: red;}
+        .modern {background: blue;}
+        .new {background: green;}
+        .likes {
+            background: #f9f9f9;
+            border-radius: 3px;
+            border: 1px solid #e5e5e5;
+            padding: 10px;
+            }
+      </style>
+    </head>
+    <body>
+
+        <div ng-controller="MainController as movies">
+            <div class="likes">
+                <p>
+                    Matt's like list
+                </p>
+                <ul>
+                    <li ng-repeat="like in movies.likesList">
+                        <p>
+                            {{ like.title }}
+                            <a href="" ng-click="movies.unlike($index);">
+                                Unlike!
+                            </a>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <ul>
+                <li ng-class="movie.year < 1995 ? 'old' : 'modern'" 
+                    ng-repeat="movie in movies.favorites">
+                    <p>{{ movie.title }} {{ $index }}</p>
+                    <p>Released in: {{ movie.year }}</p>
+                    <!-- The biggest difference between ng-if compared to ng-if and ng-hide/ng-show is ng-if will actually destroy the dom element, whereas 
+                    ng-hide/ng-show will set css to display none. -->
+                    <p ng-hide="!movie.popular">This movie is popular!</p>
+                    <p ng-show="movie.year > '2000'">This is a newer movie!</p>
+                    <div ng-switch="movie.category">
+                        <div ng-switch-when="fantasy">Fantasy movie!</div>
+                        <div ng-switch-when="thriller">Thriller movie!</div>
+                        <div ng-switch-when="comedy">Comedy movie!</div>
+                        <div ng-switch-default>Movie has no category</div>
+                        <input type="text" ng-model="movie.year">
+                    </div>
+                    <p>
+                        <a href="" ng-click="movies.addToLikes(movie);">
+                            Like this movie
+                        </a>
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <script src="js/app.js"></script>
+        <script src="js/MainController.js"></script>
+    </body>
+</html>
